@@ -9,3 +9,5 @@ meeting with all the parties. during march.
 python libraries, lime, 
 
 correlation  between econocims of people and and relaestate and....
+
+Include covid impact on listing price
