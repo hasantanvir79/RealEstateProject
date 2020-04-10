@@ -135,5 +135,13 @@ In order to understand the distribution of the features, we produced bar plots a
 Before plotting the histogram for the price, we subdivided the price into two categories, rent and sale based on a threshhold at 10000 Euro randomly since rent higher than this might become unrealistic. 
 ![alt text](Plots/rent.png)
 ![alt text](Plots/sale.png)
+In this following plot, we can see a distribution of properties having energy marks. 
 ![alt text](Plots/energycounts.png)
-![alt text](Plots/std_ta.PNG)
+
+In the following plot, we are observing the total area of the property based on their standard deviation. 
+![alt text](Plots/std_ta.png)
+
+From the plot, we can see that we have data with standard deviation close to 100. So, we have to perform some data cleaning. At first we removed the two highest values which seemed very unrealistic and plotted the standard deviation again as follows. 
+![alt text](Plots/std_after.png)
+Still we can see that we have data as high as 70 or so and most of the points are clustered under 20 std. 
+
