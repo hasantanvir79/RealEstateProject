@@ -14,16 +14,16 @@ The objectives of the project are the followings
 The data is scrapped from kv.ee, as a result, data etching, transforming, loading (ETL cycle) will be performed on top of the analysis. 
 The steps are as followed;
 * Data Collection
+* Data Cleaning
 * Initial Preprocessing
 * Exploratory Data Analysis
-* Data Cleaning
 *
 *
 *
 *
 
 ### Data Collection
-Data have been colected using the scrapper.py script from kv.ee website. It took around 18 hours to collect all the 26,309 instances. For scrapping data from any website, the important part is to understand the strucure of the website. My supervisor, Arko, helped me writing the scrapper on which I improvised it slightly. 
+Data have been colected using the scrapper.py script from kv.ee website. The script has been provided by Arko Keskula, my supervisor, on which I improvised. It took around 18 hours to collect all the 26,309 instances. For scrapping data from any website, the important part is to understand the strucure of the website. 
 
 The following tables shows how the raw data looks;
 
@@ -81,15 +81,6 @@ memory usage: 4.1+ MB<br>
 Total number of records: 26,309<br>
 Duplicated records are 0.000%<br>
 ```
-We have cosidered the links as a composite key ID and separated date and name as technical ID. Usable features are only the followings;
-
-> rooms<br>
-> totalarea<br>
-landarea<br>
-price<br>
-pricesqm<br>
-builtyear<br>
-
 
 Mean and standard deviation of the usable features were calculated afterwards to understand the distribution of the data. 
 
