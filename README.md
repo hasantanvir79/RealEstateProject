@@ -139,29 +139,65 @@ dtype: float64
 After calculating the mean and standard deviation, we can gather initial idea of the dataset. Mean and std of totalarea seems a bit high, could be becuase of different object type. We will tace care of that later. 
 
 Number of missing values are as visualized as follows, 
-![alt text](Plots/nullv)
+![alt text](Plots/nullvalue.png)
 The missing values in percentage are as follows,
 ```
-rooms         32.505987
-totalarea     33.155954
-landarea      70.356152
-price          1.854879
-pricesqm       2.820328
-numoffloor    25.827664
-geoloc         3.257440
-builtyear     50.313581
-energymark    78.999582
-condition     51.982211
-link           0.000000
+date             0.000000
+name             1.794063
+rooms           32.718841
+totalarea       28.872249
+landarea        70.356152
+price            2.117146
+pricesqm         2.527652
+numoffloor       2.345205
+builtyear       50.598654
+energymark      64.510244
+condition       57.501235
+link             0.000000
+listing_type     1.794063
+county           1.794063
+obj_type         0.000000
+latitude         3.257440
+longitude        3.257440
 dtype: float64
 ```
-In order to understand the distribution of the features, we produced bar plots and histograms according to the features. 
-![alt text](Plots/roomcount.png)
-Before plotting the histogram for the price, we subdivided the price into two categories, rent and sale based on a threshhold at 10000 Euro randomly since rent higher than this might become unrealistic. 
-![alt text](Plots/rent.png)
-![alt text](Plots/sale.png)
-In this following plot, we can see a distribution of properties having energy marks. 
-![alt text](Plots/energycounts.png)
+
+
+The dataset gives us interesting information regarding Estonian Realestate Market. 
+
+### Apartment
+## Room
+At first we look at the object type categorized as apartment. 
+![alt text](Plots/numberofrooms_apt.png)
+
+From the bar plot, we can see most of the listed apartments have 1 to 5 rooms. And listings with 2 rooms are the highest in number which also represents the demand for 2 and 3 room apartments in Estonian Realestate market. 
+
+Further segregation of the rooms apartment according to listing type, "sale" and "rent" is shown in the following bar plot. 
+![alt text](Plots/numberofrooms_apt_rentvssale.png)
+
+The diagram shows that the demand for renting 1 room apartment is higher than listings for sale. On the otherhand, sale listings with 2,3,4,5 room are higher in number than renting similar apartments. This may indicate that people look to buy bigger houses and rent smaller one. 3 room apartments are the highest listing in the recent (2020 Pre-COVID-19) real estate market. 
+
+## Energy Mark
+The dataset also holds energymarks available for the listings. In this following plot, we can see a bar plot of energy marks of the apartments. 
+![alt text](Plots/energy_mark_apt.png)
+From the figure, we can see that most of the listings do not have energy marks (puudub) and the next highest is B graded listings and so on. Apartments with energy efficient equipments (energy mark: A) is very low. 
+
+![alt text](Plots/energy_mark_rentvssale.png)
+Mostly, the new apartments, have A graded appliences which are up for sale and the others are B,D,C,E. 
+
+
+## Price 
+The dataset also houses the vital information, price of the listed apartments. The following histogram shows all the apartments available for rent and sale. 
+
+![alt text](Plots/apt_price.png)
+
+After dividing the listings between rent and sale properties, we find the following histograms. 
+![alt text](Plots/rent_price_apt.png)
+Most of the rents are between 200 and 1000 euro where median is 400 Euro, Mean is 528.65 Euro, Mode is 350 Euro
+
+![alt text](Plots/sale_price_apt.png)
+Most of the apartments are for sale are between 10,000 Euro and 1,000,000 euro where median is 94,000 Euro, Mean is 114,775.76 Euro, Mode is 75,000 Euro
+
 
 In the following plot, we are observing the total area of the property based on their standard deviation. 
 ![alt text](Plots/std_ta.png)
