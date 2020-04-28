@@ -34,11 +34,25 @@ The following tables shows how the raw data looks;
 |  2 | 2020-03-25 | Müüa korter, 2 tuba - Riia 20a, Riia kvartal, Kesklinn, Tartu linn, Tartu, Tartumaa |       2 | 43 m²       |          2 | 104 000 € | 2 419 €/m2 | 1/8          | 58.3716346051467,26.7195677645569 |        2021 | B            | Uus         | https://www.kv.ee/tapsema-info-saamiseks-kulastage-arenduse-riia-kva-3220698.html?nr=3&search_key=c969965abaf64f3b5db75e0e0c896ab1  |
 |  3 | 2020-03-25 | Müüa korter, 3 tuba - Tähe 19-7, Kesklinn, Tartu linn, Tartu, Tartumaa              |       3 | 56.3 m²     |          3 | 157 600 € | 2 799 €/m2 | 2/4          | 58.3702863,26.7270915             |         nan | B            | nan         | https://www.kv.ee/endise-restoran-kaseke-asemele-rajatakse-modernne-3188742.html?nr=4&search_key=c969965abaf64f3b5db75e0e0c896ab1   |
 |  4 | 2020-03-25 | Müüa korter, 3 tuba - Riia 20b, Riia kvartal, Kesklinn, Tartu linn, Tartu, Tartumaa |       3 | 61.5 m²     |          3 | 140 000 € | 2 276 €/m2 | 1/7          | 58.3714770688946,26.7197179682617 |        2020 | B            | Uus         | https://www.kv.ee/tapsema-info-saamiseks-kulastage-arenduse-riia-kva-3162151.html?nr=5&search_key=c969965abaf64f3b5db75e0e0c896ab1  |
-
-
-
+```
+Datatypes
+date           object
+name           object
+rooms          object
+totalarea      object
+landarea       object
+price          object
+pricesqm       object
+numoffloor     object
+geoloc         object
+builtyear     float64
+energymark     object
+condition      object
+link           object
+dtype: object
+```
 ### Initial Preprocessing
-After the data were collected, it has been observed that some of the column holds data of another column. It happened because of inconsistent structure of the website. Although other elemnts have been handled during the scrapping session, some still had to be placed in their right position. Simply removing the value woudl increase the number of empty cells and which will directly impact on the data. initial_preprocessing.py script was used to perform this initial preprocessing steps. This script also converts the data type from object to string or integer or float as required and also the units are removed for ease of calculation.
+After the data were collected, it has been observed that some of the column holds data of another column. It happened because of inconsistent structure of the website. Although other elemnts have been handled during the scrapping session, some still had to be placed in their right position. Simply removing the value would increase the number of empty cells and which will directly impact on the data. initial_preprocessing.py script was used to perform this initial preprocessing steps. This script also converts the data type from object to string or integer or float as required and also the units are removed for ease of calculation.
 
 After initial preprocessing the data looks much cleaner. Following is table showing first ten instances, 
 |    | date       | name                                                                                                                                         | rooms   | totalarea   | landarea   | price    | pricesqm   | numoffloor   | builtyear   | energymark   | condition          | link                                                                                                                               | listing_type   | county      | obj_type         | latitude         | longitude        |
@@ -46,62 +60,85 @@ After initial preprocessing the data looks much cleaner. Following is table show
 | 0  | 2020-03-21 | Müüa äripind, ladu, tootmine, tootmine, ladu, teenindus, kaubandus, büroo, 3 239,7 m² - Tööstuspargi 2, Voka alevik, Toila vald, Ida-Virumaa | 10.0    | 3239.7      | nan        | 130000.0 | 40.1       | 2            | 1995.0      | nan          | Vajab san. remonti | https://www.kv.ee/tootmishoonekulmladutoostuslik-kalasuitsetamineteh-3214303.html?nr=1&search_key=c969965abaf64f3b5db75e0e0c896ab1 | sale           | ida-virumaa | commercial_space | 59.4022452       | 27.5802792       |
 | 1  | 2020-03-21 | Müüa korter, 3 tuba - Riia 20b, Riia kvartal, Kesklinn, Tartu linn, Tartu, Tartumaa                                                          | 3.0     | 61.5        | nan        | 140000.0 | 2276.0     | 1/7          | 2020.0      | b            | Uus                | https://www.kv.ee/tapsema-info-saamiseks-kulastage-arenduse-riia-kva-3162151.html?nr=2&search_key=c969965abaf64f3b5db75e0e0c896ab1 | sale           | tartumaa    | apartment        | 58.3714770688946 | 26.7197179682617 |
 | 2  | 2020-03-21 | Anda üürile korter, 1 tuba - TÄHETORNI 31, Nõmme, Tallinn, Harjumaa                                                                          | 1.0     | nan         | nan        | 3.65     | 0.0        | -            | nan         | nan          | nan                | https://www.kv.ee/tuba-kahele-7-30-eur-paev-rendile-anda-tuba-kahele-3213086.html?nr=3&search_key=c969965abaf64f3b5db75e0e0c896ab1 | rent           | harjumaa    | apartment        | 59.3870961       | 24.6384003       |
+
+```
+Datatypes
+date             object
+name             object
+rooms           float64
+totalarea       float64
+landarea        float64
+price           float64
+pricesqm        float64
+numoffloor       object
+builtyear       float64
+energymark       object
+condition        object
+link             object
+listing_type     object
+county           object
+obj_type         object
+latitude        float64
+longitude       float64
+dtype: object
+```
+
 ### Exploratory Data Analysis
 The dataframe has the following features and elements, <br>
 ```
-Int64Index: 26309 entries, 0 to 26308<br>
-Data columns (total 13 columns):<br>
-date          26309 non-null object<br>
-name          25837 non-null object<br>
-rooms         17757 non-null float64<br>
-totalarea     17586 non-null float64<br>
-landarea      7799 non-null float64<br>
-price         25821 non-null float64<br>
-pricesqm      25567 non-null float64<br>
-numoffloor    19514 non-null object<br>
-geoloc        25452 non-null object<br>
-builtyear     13072 non-null float64<br>
-energymark    5525 non-null object<br>
-condition     12633 non-null object<br>
-link          26309 non-null object<br>
-dtypes: float64(6), object(7)<br>
-memory usage: 4.1+ MB<br>
-Total number of records: 26,309<br>
-Duplicated records are 0.000%<br>
+Information
+<class 'pandas.core.frame.DataFrame'>
+Int64Index: 26309 entries, 0 to 26308
+Data columns (total 17 columns):
+ #   Column        Non-Null Count  Dtype  
+---  ------        --------------  -----  
+ 0   date          26309 non-null  object 
+ 1   name          25837 non-null  object 
+ 2   rooms         17701 non-null  float64
+ 3   totalarea     18713 non-null  float64
+ 4   landarea      7799 non-null   float64
+ 5   price         25752 non-null  float64
+ 6   pricesqm      25644 non-null  float64
+ 7   numoffloor    25692 non-null  object 
+ 8   builtyear     12997 non-null  float64
+ 9   energymark    9337 non-null   object 
+ 10  condition     11181 non-null  object 
+ 11  link          26309 non-null  object 
+ 12  listing_type  25837 non-null  object 
+ 13  county        25837 non-null  object 
+ 14  obj_type      26309 non-null  object 
+ 15  latitude      25452 non-null  float64
+ 16  longitude     25452 non-null  float64
+dtypes: float64(8), object(9)
+memory usage: 4.9+ MB
 ```
-We have cosidered the links as a composite key ID and separated date and name as technical ID. Usable features are only the followings;
-
-> rooms<br>
-> totalarea<br>
-landarea<br>
-price<br>
-pricesqm<br>
-builtyear<br>
-
-
 Mean and standard deviation of the usable features were calculated afterwards to understand the distribution of the data. 
 
 ```
 Mean of the features
-rooms        3.135777e+00
-totalarea    4.321837e+07
+rooms        3.048924e+00
+totalarea    4.061684e+07
 landarea     1.724522e+04
-price        1.210932e+05
-pricesqm     8.561442e+02
-builtyear    1.989096e+03
+price        1.034639e+05
+pricesqm     8.104609e+02
+builtyear    1.992222e+03
+latitude     5.899602e+01
+longitude    2.528726e+01
 dtype: float64
 Standard Deviation of the features
-rooms        2.619628e+00
-totalarea    4.054489e+09
+rooms        2.005834e+00
+totalarea    3.930508e+09
 landarea     9.210906e+04
-price        4.463007e+05
-pricesqm     9.525674e+02
-builtyear    7.182918e+01
+price        2.158014e+05
+pricesqm     1.039888e+03
+builtyear    3.310879e+01
+latitude     1.709282e+00
+longitude    5.094627e+00
 dtype: float64
 ```
-After calculating the mean and standard deviation, we can see that some of mean and standard deviation of the total are unrealistically large which might have been caused by some extreme values present in tha dataset. 
+After calculating the mean and standard deviation, we can gather initial idea of the dataset. Mean and std of totalarea seems a bit high, could be becuase of different object type. We will tace care of that later. 
 
-We will tace care of that later, but for now let us understand out data. At first, let us look at our missing values. 
+Number of missing values are as visualized as follows, 
 ![alt text](Plots/nullvalue.png)
 The missing values in percentage are as follows,
 ```
