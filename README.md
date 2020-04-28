@@ -144,4 +144,13 @@ In the following plot, we are observing the total area of the property based on 
 From the plot, we can see that we have data with standard deviation close to 100. So, we have to perform some data cleaning. At first we removed the two highest values which seemed very unrealistic and plotted the standard deviation again as follows. 
 ![alt text](Plots/std_after.png)
 Still we can see that we have data as high as 70 or so and most of the points are clustered under 20 std. 
+![alt text](Plots/std_after_further.png)
+After, removing those values, we can still see that our data is clustered under 5 standard deviation. The reason behind this is there are some listing which are actually not an apartment rather a land which is why the deviation. 
+Now, we will split the data set into two based on their standard deviation and keep one part that is in 5th standard deviation one one dataframe and the other which is higher than 5th standard deviation. 
+
+The following is the plot of the instances that we believe are apartmnets based on totalarea. 
+![alt text](Plots/std_apt.png)
+
+Still we can see that the histogram is very skewed. I think we can clean further and get more acceptable data.
+![alt text](Plots/std_apt_hist.png)
 

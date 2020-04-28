@@ -1,6 +1,8 @@
 from selenium import webdriver
 from webdriver_manager.chrome import ChromeDriverManager
 from selenium.common.exceptions import NoSuchElementException
+from selenium.webdriver.chrome.options import Options
+
 import datetime
 import pandas as pd
 import numpy as np
@@ -29,7 +31,7 @@ def generate_links(x):
     """Parse links from a file ('links.txt')
     and add pagination (+1) to the link"""
     urls = []
-    MAX_PAGE_NUM = 527
+    MAX_PAGE_NUM = 508
     MAX_PAGE_DIG = 1
     for i in range(1, MAX_PAGE_NUM + 1):
         page_num = (MAX_PAGE_DIG - len(str(i))) * "0" + str(i)
@@ -43,12 +45,12 @@ def driver_init():
 
     """Select the driver and driver options"""
     options = webdriver.ChromeOptions()
-    options.add_argument('headless')
+    options.add_argument('--headless')
     # You need to specify the place you have your chrome/firefox etc installed
     options.binary_location = '/usr/bin/google-chrome'
-    driver = webdriver.Chrome(ChromeDriverManager().install())
+    driver = webdriver.Chrome(ChromeDriverManager().install(), options=options)
     #driver = webdriver.Chrome(options=options)
-    driver.set_window_size(1120, 550)
+    #driver.set_window_size(1120, 550)
     return driver
     print('\t Driver initialized \n',
           'Driver: %s \n' % driver,
@@ -232,21 +234,10 @@ def toote_info(x):
             
         
         try:
-            
-            if (driver.find_element_by_xpath('/html/body/div[2]/div/div[2]/div[3]/div[2]/div/div[1]/table/tbody/tr[6]/th').text=='Energiam\E4rgis'):
-                energymark.append(driver.find_element_by_xpath('/html/body/div[2]/div/div[2]/div[3]/div[2]/div/div[1]/table/tbody/tr[6]/td').text)            
-                
-            elif (driver.find_element_by_xpath('/html/body/div[2]/div/div[2]/div[3]/div[2]/div/div[1]/table/tbody/tr[7]/th').text=='Energiam\E4rgis'):
-                energymark.append(driver.find_element_by_xpath('/html/body/div[2]/div/div[2]/div[3]/div[2]/div/div[1]/table/tbody/tr[7]/td').text)
-                
-            elif (driver.find_element_by_xpath('/html/body/div[2]/div/div[2]/div[3]/div[2]/div/div[1]/table/tbody/tr[8]/th/a').text=='Energiam\E4rgis'):
-                energymark.append(driver.find_element_by_xpath('/html/body/div[2]/div/div[2]/div[3]/div[2]/div/div[1]/table/tbody/tr[8]/td').text)
-                
-            elif (driver.find_element_by_xpath('/html/body/div[2]/div/div[2]/div[3]/div[2]/div/div[1]/table/tbody/tr[9]/th/a').text=='Energiam\E4rgis'):
-                energymark.append(driver.find_element_by_xpath('/html/body/div[2]/div/div[2]/div[3]/div[2]/div/div[1]/table/tbody/tr[9]/td').text)
-
-            elif (driver.find_element_by_xpath('/html/body/div[2]/div/div[2]/div[3]/div[2]/div/div[1]/table/tbody/tr[10]/th/a').text=='Energiam\E4rgis'):
-                energymark.append(driver.find_element_by_xpath('/html/body/div[2]/div/div[2]/div[3]/div[2]/div/div[1]/table/tbody/tr[10]/td').text)
+            energymark.append(driver.find_element_by_css_selector('.energy-label').text)
+        except NoSuchElementException as e:
+            print("NoSuchElementException \n" + str(e))
+            energymark.append(None)
              
            
         except NoSuchElementException as e:
