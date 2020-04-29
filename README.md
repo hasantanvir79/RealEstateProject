@@ -187,7 +187,7 @@ Mostly, the new apartments, have A graded appliences which are up for sale and t
 
 
 ## Price 
-The dataset also houses the vital information, price of the listed apartments. The following histogram shows all the apartments available for rent and sale. 
+The dataset also includes the vital information, price of the listed apartments. The following histogram shows all the apartments available for rent and sale. 
 
 ![alt text](Plots/apt_price.png)
 
@@ -198,6 +198,19 @@ Most of the rents are between 200 and 1000 euro where median is 400 Euro, Mean i
 ![alt text](Plots/sale_price_apt.png)
 Most of the apartments are for sale are between 10,000 Euro and 1,000,000 euro where median is 94,000 Euro, Mean is 114,775.76 Euro, Mode is 75,000 Euro
 
+## Price per square meter (Pricesqm)
+From the pricesqm column of the listed apartments, we can visualize the distribution.
+![alt text](Plots/pricesqm_apt.png)
+
+![alt text](Plots/rent_pricesqm_apt_skew.png)
+After separating the rent listings, we can see that the distribution is very skewed becuase of some high values whereas almost all the listings fall in the range of 0 to 50. So, we visualized another disribution of pricesqm under 50 Euro. 
+
+![alt text](Plots/rent_pricesqm_apt_non_skew.png)
+Price per square meter of most of the rent-properties are around 10 Euro, where median is 10.20 Euro, Mean is 11.64 Euro, Mode is 10 Euro. 
+The mean, median, mode are calculated taking into consideration of values that are larger than 50. 
+
+![alt text](Plots/sale_pricesqm_apt.png)
+Price per square meter of most of the sale-properties are under 4000 Euro, where median is 1744 Euro, Mean is 1743.50 Euro, Mode is 0 Euro becuase of some lsitings that has 0 Euro as pricesqm which is highest in number.
 
 In the following plot, we are observing the total area of the property based on their standard deviation. 
 ![alt text](Plots/std_ta.png)
