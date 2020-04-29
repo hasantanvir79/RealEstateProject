@@ -227,7 +227,7 @@ After, dividing the dataset into rent and sale, we get the followings,
 From, both of the plots, we can figure out that there is a boom in 2020 in building new apartment buildings. The second highest peak is between 2000 and 2010 when Estonia became a member of European Union. 
 
 
-
+******under review********
 
 In the following plot, we are observing the total area of the property based on their standard deviation. 
 ![alt text](Plots/std_ta.png)
