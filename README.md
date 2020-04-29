@@ -14,9 +14,9 @@ The objectives of the project are the followings
 The data is scrapped from kv.ee, as a result, data etching, transforming, loading (ETL cycle) will be performed on top of the analysis. 
 The steps are as followed;
 * Data Collection
+* Data Cleaning
 * Initial Preprocessing
 * Exploratory Data Analysis
-* Data Cleaning
 *
 *
 *
@@ -32,8 +32,7 @@ The following tables shows how the raw data looks;
 |  0 | 2020-03-25 | Müüa korter, 2 tuba - Sitsi 14a-5, Sitsi, Põhja-Tallinn, Tallinn, Harjumaa          |       2 | 50.2 m²     |          2 | 140 000 € | 2 789 €/m2 | 3/3          | 59.4520609,24.7017383             |        2020 | B            | Uus         | https://www.kv.ee/muua-uus-2toaline-korter-2020-a-sugisel-valmivas-u-3192088.html?nr=1&search_key=c969965abaf64f3b5db75e0e0c896ab1  |
 |  1 | 2020-03-25 | Anda üürile korter, 2 tuba - Tõnismägi 11A, Tõnismägi, Kesklinn, Tallinn, Harjumaa  |       2 | 54.4 m²     |          2 | 800 €     | 14.7 €/m2  | 4/7          | 59.4295558,24.7424516             |        2019 | B            | Uus         | https://www.kv.ee/uurile-on-anda-asja-valminud-sisustatud-korter-ton-3215615.html?nr=2&search_key=c969965abaf64f3b5db75e0e0c896ab1  |
 |  2 | 2020-03-25 | Müüa korter, 2 tuba - Riia 20a, Riia kvartal, Kesklinn, Tartu linn, Tartu, Tartumaa |       2 | 43 m²       |          2 | 104 000 € | 2 419 €/m2 | 1/8          | 58.3716346051467,26.7195677645569 |        2021 | B            | Uus         | https://www.kv.ee/tapsema-info-saamiseks-kulastage-arenduse-riia-kva-3220698.html?nr=3&search_key=c969965abaf64f3b5db75e0e0c896ab1  |
-|  3 | 2020-03-25 | Müüa korter, 3 tuba - Tähe 19-7, Kesklinn, Tartu linn, Tartu, Tartumaa              |       3 | 56.3 m²     |          3 | 157 600 € | 2 799 €/m2 | 2/4          | 58.3702863,26.7270915             |         nan | B            | nan         | https://www.kv.ee/endise-restoran-kaseke-asemele-rajatakse-modernne-3188742.html?nr=4&search_key=c969965abaf64f3b5db75e0e0c896ab1   |
-|  4 | 2020-03-25 | Müüa korter, 3 tuba - Riia 20b, Riia kvartal, Kesklinn, Tartu linn, Tartu, Tartumaa |       3 | 61.5 m²     |          3 | 140 000 € | 2 276 €/m2 | 1/7          | 58.3714770688946,26.7197179682617 |        2020 | B            | Uus         | https://www.kv.ee/tapsema-info-saamiseks-kulastage-arenduse-riia-kva-3162151.html?nr=5&search_key=c969965abaf64f3b5db75e0e0c896ab1  |
+
 ```
 Datatypes
 date           object
@@ -51,10 +50,12 @@ condition      object
 link           object
 dtype: object
 ```
-### Initial Preprocessing
-After the data were collected, it has been observed that some of the column holds data of another column. It happened because of inconsistent structure of the website. Although other elemnts have been handled during the scrapping session, some still had to be placed in their right position. Simply removing the value would increase the number of empty cells and which will directly impact on the data. initial_preprocessing.py script was used to perform this initial preprocessing steps. This script also converts the data type from object to string or integer or float as required and also the units are removed for ease of calculation.
+### Initial Preprocessing & Data Cleaning
+After the data collection, it was observed just by looking at the dataframe that some of the column holds data of another column. It happened because of inconsistent structure of the website. Although other elemnts have been handled during the scrapping session, some still had to be placed in their right position. Simply removing the value would increase the number of empty cells and which will directly impact on the data. initial_preprocessing.py script was used to perform this initial preprocessing steps. This script also converts the data type from object to string or integer or float as required and also the units are removed for ease of calculation.
 
-After initial preprocessing the data looks much cleaner. Following is table showing first ten instances, 
+The initial preprocessing and data cleaning were made easy and modular by Arko, my supervisor. proc_raw.py has multiple methods. We can pass the raw dataframe to split_and_get() and then to my_great_cleaning_function() method which will return a cleaned and preprocessed dataframe. 
+
+Following is table showing first few instances, 
 |    | date       | name                                                                                                                                         | rooms   | totalarea   | landarea   | price    | pricesqm   | numoffloor   | builtyear   | energymark   | condition          | link                                                                                                                               | listing_type   | county      | obj_type         | latitude         | longitude        |
 |:---|:-----------|:---------------------------------------------------------------------------------------------------------------------------------------------|:--------|:------------|:-----------|:---------|:-----------|:-------------|:------------|:-------------|:-------------------|:-----------------------------------------------------------------------------------------------------------------------------------|:---------------|:------------|:-----------------|:-----------------|:-----------------|
 | 0  | 2020-03-21 | Müüa äripind, ladu, tootmine, tootmine, ladu, teenindus, kaubandus, büroo, 3 239,7 m² - Tööstuspargi 2, Voka alevik, Toila vald, Ida-Virumaa | 10.0    | 3239.7      | nan        | 130000.0 | 40.1       | 2            | 1995.0      | nan          | Vajab san. remonti | https://www.kv.ee/tootmishoonekulmladutoostuslik-kalasuitsetamineteh-3214303.html?nr=1&search_key=c969965abaf64f3b5db75e0e0c896ab1 | sale           | ida-virumaa | commercial_space | 59.4022452       | 27.5802792       |
