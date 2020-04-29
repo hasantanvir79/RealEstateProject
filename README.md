@@ -212,6 +212,23 @@ The mean, median, mode are calculated taking into consideration of values that a
 ![alt text](Plots/sale_pricesqm_apt.png)
 Price per square meter of most of the sale-properties are under 4000 Euro, where median is 1744 Euro, Mean is 1743.50 Euro, Mode is 0 Euro becuase of some lsitings that has 0 Euro as pricesqm which is highest in number.
 
+
+## Price per square meter (Pricesqm)
+According to the builtyear column, we prepared a log scale visualization. 
+![alt text](Plots/builtyear_apt_log.png)
+
+And the following is a natural scale bar plot, 
+![alt text](Plots/builtyear_apt.png)
+
+After, dividing the dataset into rent and sale, we get the followings, 
+![alt text](Plots/builtyear_rent_apt.png)
+![alt text](Plots/builtyear_sale_apt.png)
+
+From, both of the plots, we can figure out that there is a boom in 2020 in building new apartment buildings. The second highest peak is between 2000 and 2010 when Estonia became a member of European Union. 
+
+
+
+
 In the following plot, we are observing the total area of the property based on their standard deviation. 
 ![alt text](Plots/std_ta.png)
 
